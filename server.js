@@ -2,6 +2,8 @@ const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
 
+const port = process.env.PORT || 3000;
+
 var app = express();
 
 hbs.registerPartials(__dirname + '/views/partials');
@@ -17,14 +19,14 @@ hbs.registerHelper('capitalize', (text) => {
   return text.toUpperCase();
 });
 
-app.use((req, res, next) => {
-  res.render('maintanence.hbs', {
-    pageTitle: "Maintanence",
-    pageHeader: "Website under maintanence",
-    pageContent: "Website will be up in 15minutes"
-  });
-  next();
-});
+// app.use((req, res, next) => {
+//   res.render('maintanence.hbs', {
+//     pageTitle: "Maintanence",
+//     pageHeader: "Website under maintanence",
+//     pageContent: "Website will be up in 15minutes"
+//   });
+//   next();
+// });
 
 app.use((req, res, next) => {
   var now = new Date().toString();
@@ -56,6 +58,6 @@ app.get('/error', (req, res) => {
 });
 
 
-app.listen(3000, ()=> {
-  console.log('Server started is up on 3000');
+app.listen(port, ()=> {
+  console.log(`Server started is up on ${port}`);
 });
